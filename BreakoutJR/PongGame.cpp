@@ -29,6 +29,11 @@ PongGame::PongGame(int scoreToWin, sf::Font* font)
 	m_p1_score.setFillColor(sf::Color::White);
 	m_p1_score.setPosition(sf::Vector2f(120.0f, 0.0f));
 
+	rotatingRect1 = Rect(sf::Vector2f(100, 200), 200, 50, 0);
+	rotatingRect2 = Rect(sf::Vector2f(500, 100), 200, 50, 0);
+	rotatingRect1.SetRotation(rotatingRect1.GetRotation() - 45.0f);
+	rotatingRect2.SetRotation(rotatingRect2.GetRotation() + 45.0f);
+
 	if (!bufferPaddleBounce.loadFromFile("tone-beep.wav")) {
 		std::cerr << "error loading bounce sound \n";
 	}
@@ -48,12 +53,12 @@ void PongGame::PollKeys(float stepSize) {
 	float paddleStep = PIXELS_PER_MILLISECOND * stepSize;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
 		sf::Vector2f oldPos = m_playerOne.GetPosition();
-		oldPos.x = std::max(std::min((oldPos.x - paddleStep), COURT_WIDTH + HORIZONTAL_MARGIN), HORIZONTAL_MARGIN);
+		oldPos.x = std::max(std::min((oldPos.x - paddleStep), COURT_WIDTH + HORIZONTAL_MARGIN - PADDLE_WIDTH), HORIZONTAL_MARGIN);
 		m_playerOne.SetPosition(oldPos);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
 		sf::Vector2f oldPos = m_playerOne.GetPosition();
-		oldPos.x = std::max(std::min((oldPos.x + paddleStep), COURT_WIDTH + HORIZONTAL_MARGIN), HORIZONTAL_MARGIN);
+		oldPos.x = std::max(std::min((oldPos.x + paddleStep), COURT_WIDTH + HORIZONTAL_MARGIN - PADDLE_WIDTH), HORIZONTAL_MARGIN);
 		m_playerOne.SetPosition(oldPos);
 	}
 }
@@ -72,6 +77,11 @@ GAME_STATE PongGame::ServeP1(float stepSize) {
 }
 
 GAME_STATE PongGame::UpdateMoving(float stepSize) {
+
+	//rotation
+	//rotatingRect1.SetRotation(rotatingRect1.GetRotation() + 0.50f);
+	//rotatingRect2.SetRotation(rotatingRect2.GetRotation() + 0.50f);
+
 	//ball movement
 	m_ball.SetPosition(sf::Vector2f(m_ball.GetPosition().x + m_ball.GetVelocity().x, m_ball.GetPosition().y + m_ball.GetVelocity().y));
 	//ball bounce
@@ -80,6 +90,11 @@ GAME_STATE PongGame::UpdateMoving(float stepSize) {
 	sf::Vector2f bounceVect4 = CollisionHandler::DetectBallCollision(m_ball.GetBall(), m_ball.GetVelocity(), m_lowerWall, m_lowerWall.getPosition(), false);
 	sf::Vector2f bounceVect5 = CollisionHandler::DetectBallCollision(m_ball.GetBall(), m_ball.GetVelocity(), m_right_wall, m_right_wall.getPosition(), true);
 	sf::Vector2f bounceVect6 = CollisionHandler::DetectBallCollision(m_ball.GetBall(), m_ball.GetVelocity(), m_left_wall, m_left_wall.getPosition(), true);
+
+	//sf::Vector2f bounceVect7 = CollisionHandler::DetectBallCollision(m_ball.GetBall(), m_ball.GetVelocity(), GameRenderer::CreateDrawableRect(rotatingRect), rotatingRect.GetPosition(), true);
+
+	sf::Vector2f bounceVect7 = CollisionHandler::BounceBall(m_ball.GetBall(), m_ball.GetVelocity(), rotatingRect1);
+	sf::Vector2f bounceVect8 = CollisionHandler::BounceBall(m_ball.GetBall(), m_ball.GetVelocity(), rotatingRect2);
 
 	if (bounceVect1 != sf::Vector2f(0.0f, 0.0f)) {
 		sound.setBuffer(bufferPaddleBounce);
@@ -102,6 +117,14 @@ GAME_STATE PongGame::UpdateMoving(float stepSize) {
 	if (bounceVect6 != sf::Vector2f(0.0f, 0.0f)) {
 		m_ball.SetVelocity(bounceVect6);
 	}
+	if (bounceVect7 != sf::Vector2f(0.0f, 0.0f)) {
+		m_ball.SetVelocity(bounceVect7);
+	}
+	if (bounceVect8 != sf::Vector2f(0.0f, 0.0f)) {
+		m_ball.SetVelocity(bounceVect8);
+	}
+
+
 
 	return IN_GAME;
 }
@@ -138,6 +161,34 @@ void PongGame::Render(sf::RenderWindow* window) {
 	window->draw(m_ball.GetBall());
 	sf::RectangleShape renderPaddle1(m_playerOne.GetSize());
 	renderPaddle1.setPosition(m_playerOne.GetPosition());
+
+
+	window->draw(GameRenderer::CreateDrawableRect(rotatingRect1));
+	window->draw(GameRenderer::CreateDrawableRect(rotatingRect2));
+	std::vector<sf::Vector2f> testVector = rotatingRect1.GetPoints();
+
+	sf::CircleShape a = sf::CircleShape(5);
+	a.setPosition(testVector[0]);
+	a.setFillColor(sf::Color::Red);
+	window->draw(a);
+
+	sf::CircleShape b = sf::CircleShape(5);
+	b.setPosition(testVector[1]);
+	b.setFillColor(sf::Color::Red);
+	window->draw(b);
+
+	sf::CircleShape c = sf::CircleShape(5);
+	c.setPosition(testVector[2]);
+	c.setFillColor(sf::Color::Red);
+	window->draw(c);
+
+	sf::CircleShape d = sf::CircleShape(5);
+	d.setPosition(testVector[3]);
+	d.setFillColor(sf::Color::Red);
+	window->draw(d);
+
+
+
 	window->draw(renderPaddle1);
 	window->display();
 }

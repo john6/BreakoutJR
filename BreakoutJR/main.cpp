@@ -24,7 +24,7 @@ int main()
 	typedef std::chrono::high_resolution_clock::time_point hiRes_time_point;
 
 	hiRes_time_point currTime = hiResTime::now();
-	const microSec UPDATE_INTERVAL(10000);
+	const microSec UPDATE_INTERVAL(5000);
 	microSec lag(0);
 
 	while (window.isOpen())

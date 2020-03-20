@@ -3,12 +3,14 @@
 #include "Ball.h"
 #include "Paddle.h"
 #include "CollisionHandler.h"
+#include "GameRenderer.h"
 #include "GAME_STATE.h"
 #include "GLOBAL_CONSTANTS.h"
 #include <algorithm>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Rect.h"
 
 enum PLAY_STATE { SERVE_PLAYER_ONE, BALL_IN_PLAY };
 
@@ -32,6 +34,10 @@ private:
 	sf::RectangleShape m_right_wall;
 	sf::RectangleShape m_left_wall;
 	sf::RectangleShape m_centerLine;
+
+	Rect rotatingRect1;
+	Rect rotatingRect2;
+
 	sf::Font* m_font;
 	sf::Text m_p1_score;
 	sf::Text m_p2_score;

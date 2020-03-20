@@ -9,7 +9,7 @@ public:
 //https://www.fluentcpp.com/2019/07/23/how-to-define-a-global-constant-in-cpp/
 //according to this article I should be adding extern here but that means I have to define these variables elsewhere also
 
-const float PIXELS_PER_MILLISECOND = .90f;
+const float PIXELS_PER_MILLISECOND = .80f;
 const float MICROSECONDS_TO_MILLISECONDS = 1000.0f;
 const float PADDLE_HEIGHT = 20.0f;
 const float PADDLE_WIDTH = 100.0f;
@@ -23,3 +23,9 @@ const float HORIZONTAL_MARGIN = 25.0f;
 
 const int SCREEN_WIDTH = COURT_WIDTH + (HORIZONTAL_MARGIN * 2);
 const int SCREEN_HEIGHT = COURT_HEIGHT + (VERTICLE_MARGIN * 2);
+
+const float RADIAN_RIGHT = 0.0f;
+const float RADIAN_DOWN = -4.71239;
+const float DEGREE_RIGHT = 0.0f;
+const float DEGREE_DOWN = -270.0f;
+const float PI = 3.1459;

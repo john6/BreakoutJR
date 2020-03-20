@@ -29,6 +29,7 @@
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PongGame.cpp" />
     <ClCompile Include="PongMenu.cpp" />
+    <ClCompile Include="Rect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PongGame.h" />
     <ClInclude Include="PongMenu.h" />
+    <ClInclude Include="Rect.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="kongtext.ttf" />
