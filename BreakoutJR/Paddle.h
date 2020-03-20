@@ -1,20 +1,13 @@
 #pragma once
+#include "Rect.h"
 #include <SFML/Graphics.hpp>
 
-class Paddle
+class Paddle : public Rect
 {
 private:
-	sf::RectangleShape m_size;
-	sf::Vector2f m_position;
 
 public:
-	Paddle(sf::RectangleShape rect, sf::Vector2f position);
+	Paddle(float positionX, float positionY, float width, float height, float rotation = 0.0f);
 	Paddle() = default;
 	~Paddle();
-
-	sf::RectangleShape GetSize();
-	sf::Vector2f GetPosition();
-
-	void SetPosition(sf::Vector2f rectSet);
-	void SetSize(sf::RectangleShape rectSet);
 };

@@ -6,7 +6,7 @@
 
 class Rect
 {
-private:
+protected:
 	sf::Vector2f m_position;
 	sf::Vector2f m_center;
 	float m_width;
@@ -16,7 +16,7 @@ private:
 	float DegrToRad(float dAngle);
 
 public:
-	Rect(sf::Vector2f origin, float width, float height, float rotation);
+	Rect(float positionX, float positionY, float width, float height, float rotation = 0.0f);
 	Rect() = default;
 	~Rect();
 
@@ -25,7 +25,7 @@ public:
 	float GetWidth();
 	float GetHeight();
 	float GetRotation();
-	void SetOrigin(sf::Vector2f origin);
+	void SetPosition(sf::Vector2f origin);
 	void SetWidth(float width);
 	void SetHeight(float height);
 	void SetRotation(float rotation);

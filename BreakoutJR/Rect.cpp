@@ -1,11 +1,7 @@
 #include "Rect.h"
 
-Rect::Rect(sf::Vector2f origin, float width, float height, float rotation = 0.0f) {
-	m_position = origin;
-	m_width = width;
-	m_height = height;
-	m_rotation = rotation;
-}
+Rect::Rect(float positionX, float positionY, float width, float height, float rotation) 
+	: m_position(sf::Vector2f(positionX, positionY)), m_width(width), m_height(height),	m_rotation(rotation) {}
 
 Rect::~Rect()
 {
@@ -28,7 +24,7 @@ sf::Vector2f Rect::GetPosition() { return m_position; }
 float Rect::GetWidth() { return m_width; }
 float Rect::GetHeight() { return m_height; }
 float Rect::GetRotation() { return m_rotation;  }
-void Rect::SetOrigin(sf::Vector2f origin) { m_position = origin;  }
+void Rect::SetPosition(sf::Vector2f origin) { m_position = origin;  }
 void Rect::SetWidth(float width) { m_width = width;  }
 void Rect::SetHeight(float height) { m_height = height;  }
 void Rect::SetRotation(float rotation) { m_rotation = rotation;  }

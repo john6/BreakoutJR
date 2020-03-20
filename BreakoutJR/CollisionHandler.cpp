@@ -1,21 +1,15 @@
 #include "CollisionHandler.h"
 
+/* Old version of calculating surface normal where everything is either verticle or hoirzontal*/
 sf::Vector2f CollisionHandler::CalculateBounceDir(sf::Vector2f ballDir, sf::Vector2f surfaceDir) {
-	//verticle vector => (0,1) , (0,-1)
-	//horizontal vector => (1,0) , (-1,0)
-	//Get surface normal
 	sf::Vector2f surfNorm1(-surfaceDir.y, surfaceDir.x);
 	sf::Vector2f surfNorm2(surfaceDir.y, -surfaceDir.x);
 	return sf::Vector2f(0.0f, 0.0f);
 }
 
-CollisionHandler::CollisionHandler()
-{
-}
+CollisionHandler::CollisionHandler() {}
 
-CollisionHandler::~CollisionHandler()
-{
-}
+CollisionHandler::~CollisionHandler() {}
 
 sf::Vector2f CollisionHandler::DetectBallCollision(sf::CircleShape ball, sf::Vector2f ballVel, sf::RectangleShape rectSize, sf::Vector2f rectPos, bool verticle) {
 	sf::Vector2f rectCenter((rectPos.x + (rectSize.getSize().x / 2)), rectPos.y + (rectSize.getSize().y / 2));
@@ -24,34 +18,21 @@ sf::Vector2f CollisionHandler::DetectBallCollision(sf::CircleShape ball, sf::Vec
 	float shapeWidthX = abs(ball.getRadius() + (rectSize.getSize().x / 2));
 	float shapeHeightY = abs(ball.getRadius() + (rectSize.getSize().y / 2));
 	if ((shapeWidthX > distX) && (shapeHeightY > distY)) {
-		if (verticle) {
-			return sf::Vector2f(-ballVel.x, ballVel.y);
-		}
-		else {
-			return sf::Vector2f(ballVel.x, -ballVel.y);
-		}
+		if (verticle) { return sf::Vector2f(-ballVel.x, ballVel.y); }
+		else { return sf::Vector2f(ballVel.x, -ballVel.y); }
 	}
-	else {
-		return sf::Vector2f(0.0f, 0.0f);
-	}
+	else { return sf::Vector2f(0.0f, 0.0f); }
 }
 
 bool CollisionHandler::DetectLineIntersection(sf::CircleShape ball, sf::Vector2f point1, sf::Vector2f point2) {
 	//https://www.geeksforgeeks.org/program-find-line-passing-2-points/, https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
-	//float dX = (point2.x - point1.x);
-	//float dY = (point2.y - point1.y);
 	float a = (point2.y - point1.y);
 	float b = (point1.x - point2.x);
 	float constant = -((a * point1.x) + (b * point1.y));
 	std::vector<float> lineInterceptForm = std::vector<float>{ a, b, constant };
-
 	float distance = (   (abs((a * ball.getPosition().x) + (b * ball.getPosition().y) + constant)) / sqrt((a * a) + (b * b)) );
-	if (ball.getRadius() > distance) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	if (ball.getRadius() > distance) { return true; }
+	else { return false; }
 }
 
 float CollisionHandler::VectorLengthSqaured(sf::Vector2f point1, sf::Vector2f point2) {
@@ -85,13 +66,8 @@ bool CollisionHandler::DetectLineSegmentIntersection(sf::CircleShape ball, sf::V
 		const sf::Vector2f projection = VectorAdd(point1, sf::Vector2f(t * (point2.x - point1.x), t * (point2.y - point1.y)));
 		distBallToLine = VectorDistance(ball.getPosition(), projection);
 	}
-		if (distBallToLine > ball.getRadius()) {
-			return false;
-		}
-		else {
-			return true;
-		}
-
+		if (distBallToLine > ball.getRadius()) { return false; }
+		else { return true; }
 }
 
 float CollisionHandler::DegrToRad(float dAngle) {
@@ -110,28 +86,15 @@ sf::Vector2f CollisionHandler::BounceBall(sf::CircleShape ball, sf::Vector2f bal
 	sf::Vector2f surfaceNormal;
 	std::vector<sf::Vector2f> points = rect.GetPoints();
 	//Top side
-	if (DetectLineSegmentIntersection(ball, points[0], points[1])) {
-		surfaceNormal = RotateVector(sf::Vector2f(0.0f, 1.0f), rect.GetRotation());
-	}
+	if (DetectLineSegmentIntersection(ball, points[0], points[1])) { surfaceNormal = RotateVector(sf::Vector2f(0.0f, 1.0f), rect.GetRotation()); }
 	//Left side
-	else if (DetectLineSegmentIntersection(ball, points[0], points[2])) {
-		surfaceNormal = RotateVector(sf::Vector2f(-1.0f, 0.0f), rect.GetRotation());
-	}
+	else if (DetectLineSegmentIntersection(ball, points[0], points[2])) { surfaceNormal = RotateVector(sf::Vector2f(-1.0f, 0.0f), rect.GetRotation()); }
 	//Right side
-	else if (DetectLineSegmentIntersection(ball, points[1], points[3])) {
-		surfaceNormal = RotateVector(sf::Vector2f(1.0f, 0.0f), rect.GetRotation());
-	}
+	else if (DetectLineSegmentIntersection(ball, points[1], points[3])) { surfaceNormal = RotateVector(sf::Vector2f(1.0f, 0.0f), rect.GetRotation()); }
 	//Bottom side
-	else if (DetectLineSegmentIntersection(ball, points[2], points[3])) {
-		surfaceNormal = RotateVector(sf::Vector2f(0.0f, -1.0f), rect.GetRotation());
-	}
-	else {
-		return sf::Vector2f(0.0f, 0.0f);
-	}
-
-	//reflect balls velocity across the surface
-	//I MIGHT HAVE TO CHECK THE DIRECTION OF THE BALL BEFORE I CAN DO THIS BUT I THINK IT HAS TO BE OK BECAUSE THE BALL IS ALWAYS TRAVELLING TOWARDS THE SURFACE
-	float dotProd = (ballVel.x * surfaceNormal.x) + (ballVel.y * surfaceNormal.y);
+	else if (DetectLineSegmentIntersection(ball, points[2], points[3])) { surfaceNormal = RotateVector(sf::Vector2f(0.0f, -1.0f), rect.GetRotation()); }
+	else { return sf::Vector2f(0.0f, 0.0f); }
+	float dotProd = DotProd(ballVel, surfaceNormal);
 	float bounceDirX = ballVel.x - (2 * dotProd * surfaceNormal.x);
 	float bounceDirY = ballVel.y - (2 * dotProd * surfaceNormal.y);
 	return sf::Vector2f(bounceDirX, bounceDirY);

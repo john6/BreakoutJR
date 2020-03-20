@@ -1,5 +1,4 @@
 #pragma once
-#include "Court.h"
 #include "Ball.h"
 #include "Paddle.h"
 #include "CollisionHandler.h"
@@ -23,20 +22,18 @@ private:
 	sf::Sound sound;
 
 	int m_playerOneScore;
-	int	m_playerTwoScore;
 	int	m_maxScore;
-	Court m_court;
 	Ball m_ball;
-	Paddle m_playerOne;
-	Paddle m_playerTwo;
-	sf::RectangleShape m_upperWall;
-	sf::RectangleShape m_lowerWall;
-	sf::RectangleShape m_right_wall;
-	sf::RectangleShape m_left_wall;
-	sf::RectangleShape m_centerLine;
+	Rect m_playerOne;
 
-	Rect rotatingRect1;
-	Rect rotatingRect2;
+	Rect m_upperWall;
+	Rect m_lowerWall;
+	Rect m_right_wall;
+	Rect m_left_wall;
+	Rect m_centerLine;
+
+	Rect m_left_corner_rect;
+	Rect m_right_corner_rect;
 
 	sf::Font* m_font;
 	sf::Text m_p1_score;

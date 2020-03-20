@@ -35,7 +35,6 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CollisionHandler.h" />
-    <ClInclude Include="Court.h" />
     <ClInclude Include="GameRenderer.h" />
     <ClInclude Include="GAME_STATE.h" />
     <ClInclude Include="GLOBAL_CONSTANTS.h" />

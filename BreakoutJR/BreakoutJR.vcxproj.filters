@@ -65,9 +65,6 @@
     <ClInclude Include="PongGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Court.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
