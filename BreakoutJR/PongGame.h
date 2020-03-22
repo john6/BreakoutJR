@@ -5,6 +5,7 @@
 #include "GameRenderer.h"
 #include "GAME_STATE.h"
 #include "GLOBAL_CONSTANTS.h"
+#include "BreakObject.h"
 #include <algorithm>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -21,8 +22,9 @@ private:
 	sf::SoundBuffer bufferScore;
 	sf::Sound sound;
 
-	int m_playerOneScore;
-	int	m_maxScore;
+	int m_break_objects_remaining;
+	int	m_balls_remaining;
+
 	Ball m_ball;
 	Rect m_playerOne;
 
@@ -34,10 +36,14 @@ private:
 
 	Rect m_left_corner_rect;
 	Rect m_right_corner_rect;
+	Rect m_rotating_center_rect;
+	std::vector<std::vector<float>> breakObjectPositions;
+	std::vector<Rect> breakObjects;
+
 
 	sf::Font* m_font;
-	sf::Text m_p1_score;
-	sf::Text m_p2_score;
+	sf::Text m_blocks_remaining_text;
+	sf::Text m_balls_remaining_text;
 
 	PLAY_STATE m_playState;
 

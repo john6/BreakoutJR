@@ -33,6 +33,8 @@ public:
 
 	static bool DetectLineSegmentIntersection(sf::CircleShape ball, sf::Vector2f point1, sf::Vector2f point2);
 
+	static float GetLineSegmentDist(sf::CircleShape ball, sf::Vector2f point1, sf::Vector2f point2);
+
 	static sf::Vector2f BounceBall(sf::CircleShape ball, sf::Vector2f ballVel, Rect rect);
 
 };
