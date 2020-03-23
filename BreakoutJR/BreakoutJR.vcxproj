@@ -31,6 +31,7 @@
     <ClCompile Include="PongGame.cpp" />
     <ClCompile Include="PongMenu.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="RESOURCES.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -45,9 +46,14 @@
     <ClInclude Include="PongGame.h" />
     <ClInclude Include="PongMenu.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RESOURCES.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="kongtext.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BreakoutJR.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

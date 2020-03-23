@@ -17,6 +17,8 @@ public:
 
 	static sf::Vector2f RotateVector(sf::Vector2f point, float rotationDegrees);
 
+	static sf::Vector2f RotateVectorAboutAxis(sf::Vector2f point, sf::Vector2f axisPoint, float rotationDegrees);
+
 	static sf::Vector2f DetectBallCollision(sf::CircleShape ball, sf::Vector2f ballVel, sf::RectangleShape rectSize, sf::Vector2f rectPos, bool verticle);
 
 	static bool DetectLineIntersection(sf::CircleShape ball, sf::Vector2f point1, sf::Vector2f point2);

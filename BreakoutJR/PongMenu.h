@@ -1,26 +1,27 @@
 #pragma once
-#include "Button.h"
-#include "GAME_STATE.h"
 #include <algorithm>
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "Button.h"
+#include "GAME_STATE.h"
+#include "RESOURCES.h"
 
 class PongMenu
 {
 private:
+	RESOURCES* m_resources;
+	sf::Text m_instructions1;
+	//sf::Text m_instructions2;
+
 	Button m_playButton;
 	Button m_exitButton;
-	sf::SoundBuffer bufferButtonSound;
-	sf::Sound sound;
 	bool m_shouldExit;
 	bool m_shouldStart;
-	sf::Font* m_font;
-	sf::Text m_instructions1;
-	sf::Text m_instructions2;
+	sf::Font m_font;
 
 public:
-	PongMenu(sf::Font* font);
+	PongMenu(RESOURCES* resources);
 	~PongMenu();
 
 	bool PollInput(sf::Vector2i mousePosition, Button* button);

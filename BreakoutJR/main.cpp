@@ -7,17 +7,15 @@
 #include "PongMenu.h"
 #include "GAME_STATE.h"
 #include "GLOBAL_CONSTANTS.h"
-
+#include "RESOURCES.h"
+   
 int main()
 {
-	GAME_STATE state = MENU;
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "BREAKOUT");
-	sf::Font font;
-	if (!font.loadFromFile("kongtext.ttf")) {
-		std::cerr << "error loading font \n";
-	}
-	PongGame game(5, &font);
-	PongMenu menu = PongMenu(&font);
+	RESOURCES resources = RESOURCES();
+	PongGame game(5, &resources);
+	PongMenu menu(&resources);
+	GAME_STATE state = MENU;
 
 	typedef std::chrono::high_resolution_clock hiResTime;
 	typedef std::chrono::microseconds microSec;
@@ -51,7 +49,6 @@ int main()
 				}
 			}
 			lag -= UPDATE_INTERVAL;
-			//lag = ms(0);
 		}
 		if (state == IN_GAME) {
 			//std::cout << "render game\n";

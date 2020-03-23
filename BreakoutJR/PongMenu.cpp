@@ -1,9 +1,9 @@
 #include "PongMenu.h"
 #include "GLOBAL_CONSTANTS.h"
 
-PongMenu::PongMenu(sf::Font* font)
+PongMenu::PongMenu(RESOURCES* resources) :
+	m_resources {resources}
 {
-	m_font = font;
 	sf::RectangleShape playButtonRect(sf::Vector2f(BUTTON_WIDTH, BUTTON_HEIGHT));
 	playButtonRect.setPosition(sf::Vector2f(100, 100));
 	m_playButton = Button("Play", playButtonRect);
@@ -17,16 +17,19 @@ PongMenu::PongMenu(sf::Font* font)
 	m_shouldExit = false;
 	m_shouldStart = false;
 
-	m_instructions1.setFont(*m_font);
-	m_instructions1.setString("Controls: \n  'A' to move left,\n  'D' to move right,\n  'W' to serve \n");
-	m_instructions1.setCharacterSize(30);
+	m_font = m_resources->GetFont();
+
+	m_instructions1.setFont(m_font);
+	m_instructions1.setString("Controls: \n'A' to move left,\n'D' to move right,\n'Q' to tilt left\n'E' to tilt right\n'W' to serve \n");
+	m_instructions1.setCharacterSize(25);
 	m_instructions1.setFillColor(sf::Color::White);
-	m_instructions1.setPosition(sf::Vector2f(100, 500));
+	m_instructions1.setPosition(sf::Vector2f(100, 300));
 
-
-	if (!bufferButtonSound.loadFromFile("tone-beep.wav")) {
-		std::cerr << "error loading bounce sound \n";
-	}
+	//m_instructions2.setFont(m_font);
+	//m_instructions2.setString("Controls: \n  'A' to move left,\n  'D' to move right,\n  'W' to serve \n");
+	//m_instructions2.setCharacterSize(30);
+	//m_instructions2.setFillColor(sf::Color::White);
+	//m_instructions2.setPosition(sf::Vector2f(100, 500));
 }
 
 PongMenu::~PongMenu()
@@ -55,13 +58,11 @@ GAME_STATE PongMenu::Update(float millisecs, sf::RenderWindow* window, sf::Vecto
 	bool playButtonPressed = PollInput(mousePosition, &m_playButton);
 	bool exitButtonPressed = PollInput(mousePosition, &m_exitButton);
 	if (playButtonPressed) {
-		sound.setBuffer(bufferButtonSound);
-		sound.play();
+		m_resources->PlaySound(RESOURCES::OCTAVE_BEEP);
 		return IN_GAME;
 	}
 	else if (exitButtonPressed) {
-		sound.setBuffer(bufferButtonSound);
-		sound.play();
+		m_resources->PlaySound(RESOURCES::OCTAVE_BEEP);
 		return EXIT_GAME;
 	}
 	else { 
@@ -73,13 +74,16 @@ void PongMenu::Render(sf::RenderWindow* window) {
 	window->clear();
 	window->draw(m_playButton.GetRect());
 	window->draw(m_exitButton.GetRect());
+
 	sf::Text play = m_playButton.GetText();
-	play.setFont(*m_font);
+	play.setFont(m_font);
 	window->draw(play);
+
 	sf::Text exit = m_exitButton.GetText();
-	exit.setFont(*m_font);
+	exit.setFont(m_font);
 	window->draw(exit);
+
 	window->draw(m_instructions1);
-	window->draw(m_instructions2);
+	//window->draw(m_instructions2);
 	window->display();
 }

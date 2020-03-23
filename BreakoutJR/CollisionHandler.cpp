@@ -95,6 +95,13 @@ sf::Vector2f CollisionHandler::RotateVector(sf::Vector2f point, float rotationDe
 	return sf::Vector2f((x*cos(rotation)) - (y* sin(rotation)), (y * cos(rotation)) + (x * sin(rotation)));
 }
 
+sf::Vector2f CollisionHandler::RotateVectorAboutAxis(sf::Vector2f point, sf::Vector2f axisPoint, float rotationDegrees) {
+	float offsetX = point.x - axisPoint.x;
+	float offsetY = point.y - axisPoint.y;
+	float rotation = DegrToRad(rotationDegrees);
+	return sf::Vector2f((offsetX*cos(rotation)) - (offsetY* sin(rotation)), (offsetY * cos(rotation)) + (offsetX * sin(rotation)));
+}
+
 sf::Vector2f CollisionHandler::BounceBall(sf::CircleShape ball, sf::Vector2f ballVel, Rect rect) {
 	//Detect which was hit
 	sf::Vector2f surfaceNormal;
