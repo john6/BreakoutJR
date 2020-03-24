@@ -11,12 +11,15 @@ protected:
 	sf::Vector2f m_center;
 	float m_width;
 	float m_height;
-	float m_rotation; //in degrees
+	float m_start_rotation; //in degrees
+	float m_continuous_rotation; //in degrees
+	float m_currAngle;
+	bool m_isDeath;
 
 	float DegrToRad(float dAngle);
 
 public:
-	Rect(float positionX, float positionY, float width, float height, float rotation = 0.0f);
+	Rect(float positionX, float positionY, float width, float height, float startRot = 0.0f, float continuousRot = 0.0f, bool isDeath = false);
 	Rect() = default;
 	~Rect();
 
@@ -24,9 +27,11 @@ public:
 	std::vector<sf::Vector2f> GetPoints();
 	float GetWidth();
 	float GetHeight();
-	float GetRotation();
+	float GetCurrAngle();
+	float GetContinuousRotation();
 	void SetPosition(sf::Vector2f origin);
 	void SetWidth(float width);
 	void SetHeight(float height);
 	void SetRotation(float rotation);
+	bool IsDeath();
 };

@@ -11,10 +11,18 @@ CollisionHandler::CollisionHandler() {}
 
 CollisionHandler::~CollisionHandler() {}
 
+sf::Vector2f CollisionHandler::GetBallCenter(sf::CircleShape ball) {
+	sf::Vector2f ballPos = ball.getPosition();
+	float radius = ball.getRadius();
+	float adjacent = sqrt(radius / 2);
+	return sf::Vector2f(ballPos.x + adjacent, ballPos.y + adjacent);
+}
+
 sf::Vector2f CollisionHandler::DetectBallCollision(sf::CircleShape ball, sf::Vector2f ballVel, sf::RectangleShape rectSize, sf::Vector2f rectPos, bool verticle) {
 	sf::Vector2f rectCenter((rectPos.x + (rectSize.getSize().x / 2)), rectPos.y + (rectSize.getSize().y / 2));
-	float distX = abs(ball.getPosition().x - rectCenter.x);
-	float distY = abs(ball.getPosition().y - rectCenter.y);
+	sf::Vector2f ballCenter = GetBallCenter(ball);
+	float distX = abs(ballCenter.x - rectCenter.x);
+	float distY = abs(ballCenter.y - rectCenter.y);
 	float shapeWidthX = abs(ball.getRadius() + (rectSize.getSize().x / 2));
 	float shapeHeightY = abs(ball.getRadius() + (rectSize.getSize().y / 2));
 	if ((shapeWidthX > distX) && (shapeHeightY > distY)) {
@@ -74,12 +82,13 @@ float CollisionHandler::GetLineSegmentDist(sf::CircleShape ball, sf::Vector2f po
 	//https://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment?page=1&tab=votes#tab-top
 	const float lengthSquared = VectorLengthSqaured(point1, point2);
 	float distBallToLine;
-	if (lengthSquared == 0.0f) { distBallToLine = VectorDistance(point1, ball.getPosition()); }
+	sf::Vector2f ballCenter = GetBallCenter(ball);
+	if (lengthSquared == 0.0f) { distBallToLine = VectorDistance(point1, ballCenter); }
 	else {
 		//I dont honestly understand why we get t
-		const float t = std::max(0.0f, std::min(1.0f, DotProd(VectorSubtract(ball.getPosition(), point1), VectorSubtract(point2, point1)) / lengthSquared));
+		const float t = std::max(0.0f, std::min(1.0f, DotProd(VectorSubtract(ballCenter, point1), VectorSubtract(point2, point1)) / lengthSquared));
 		const sf::Vector2f projection = VectorAdd(point1, sf::Vector2f(t * (point2.x - point1.x), t * (point2.y - point1.y)));
-		distBallToLine = VectorDistance(ball.getPosition(), projection);
+		distBallToLine = VectorDistance(ballCenter, projection);
 	}
 	return distBallToLine;
 }
@@ -126,16 +135,16 @@ sf::Vector2f CollisionHandler::BounceBall(sf::CircleShape ball, sf::Vector2f bal
 	float radius = ball.getRadius();
 
 	if ((topDist <= std::max(leftDist, std::max(rightDist, bottomDist))) && (topDist <= radius)) {
-		surfaceNormal = RotateVector(sf::Vector2f(0.0f, 1.0f), rect.GetRotation());
+		surfaceNormal = RotateVector(sf::Vector2f(0.0f, 1.0f), rect.GetCurrAngle());
 	}
 	else if ((leftDist <= std::max(topDist, std::max(rightDist, bottomDist))) && (leftDist <= radius)) {
-		surfaceNormal = RotateVector(sf::Vector2f(-1.0f, 0.0f), rect.GetRotation());
+		surfaceNormal = RotateVector(sf::Vector2f(-1.0f, 0.0f), rect.GetCurrAngle());
 	}
 	else if ((rightDist <= std::max(topDist, std::max(leftDist, bottomDist))) && (rightDist <= radius)) {
-		surfaceNormal = RotateVector(sf::Vector2f(1.0f, 0.0f), rect.GetRotation());
+		surfaceNormal = RotateVector(sf::Vector2f(1.0f, 0.0f), rect.GetCurrAngle());
 	}
 	else if ((bottomDist <= std::max(topDist, std::max(leftDist, rightDist)) && (bottomDist <= radius))) {
-		surfaceNormal = RotateVector(sf::Vector2f(0.0f, -1.0f), rect.GetRotation());
+		surfaceNormal = RotateVector(sf::Vector2f(0.0f, -1.0f), rect.GetCurrAngle());
 	}
 	else {
 		return sf::Vector2f(0.0f, 0.0f);

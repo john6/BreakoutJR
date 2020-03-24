@@ -15,7 +15,7 @@ public:
 	sf::CircleShape GetBall();
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetVelocity();
-
+	float GetRadius();
 	void SetRadius(float pos);
 	void SetPosition(sf::Vector2f pos);
 	void SetVelocity(sf::Vector2f vel);

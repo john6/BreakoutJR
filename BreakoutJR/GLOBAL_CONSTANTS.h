@@ -11,8 +11,8 @@ public:
 
 //GAME SETTINGS
 
-const float BALL_SPEED_PER_MILLISECOND = .90f;
-const float PADDLE_SPEED_PER_MILLISECOND = 1.0f;
+const float BALL_SPEED_PER_MILLISECOND = 0.7f; // me 1.0f;                   // DAD VALUE .40f;
+const float PADDLE_SPEED_PER_MILLISECOND = 0.6f; // me 0.9f;                    // DAD VALUE 0.5f;
 const float MICROSECONDS_TO_MILLISECONDS = 1000.0f;
 const float PADDLE_HEIGHT = 20.0f;
 const float PADDLE_WIDTH = 100.0f;
@@ -34,10 +34,6 @@ const float DEGREE_RIGHT = 0.0f;
 const float DEGREE_DOWN = -270.0f;
 const float MAX_ROTATION_DEGREES = 45;
 const float PI = 3.1459f;
-
-//LEVEL ONE VALUES
-const int LEVEL_ONE_BREAKABLE_ROW_NUM = 2;
-const int LEVEL_ONE_BREAKABLE_COL_NUM = 8;
 
 //MENU SETTINGS
 const float BUTTON_WIDTH = SCREEN_WIDTH / 3;

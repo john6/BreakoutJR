@@ -15,6 +15,8 @@ public:
 
 	static float DegrToRad(float dAngle);
 
+	static sf::Vector2f GetBallCenter(sf::CircleShape ball);
+
 	static sf::Vector2f RotateVector(sf::Vector2f point, float rotationDegrees);
 
 	static sf::Vector2f RotateVectorAboutAxis(sf::Vector2f point, sf::Vector2f axisPoint, float rotationDegrees);

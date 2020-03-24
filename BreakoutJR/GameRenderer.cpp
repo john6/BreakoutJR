@@ -19,7 +19,7 @@ sf::RectangleShape GameRenderer::CreateDrawableRect(Rect rect) {
 	sf::RectangleShape drawable;
 	drawable.setPosition(rect.GetPosition());
 	drawable.setSize(sf::Vector2f(rect.GetWidth(), rect.GetHeight()));
-	drawable.setRotation(rect.GetRotation());
+	drawable.setRotation(rect.GetCurrAngle());
 	drawable.setFillColor(sf::Color::White);
 	return drawable;
 }

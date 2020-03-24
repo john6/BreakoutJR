@@ -24,12 +24,6 @@ PongMenu::PongMenu(RESOURCES* resources) :
 	m_instructions1.setCharacterSize(25);
 	m_instructions1.setFillColor(sf::Color::White);
 	m_instructions1.setPosition(sf::Vector2f(100, 300));
-
-	//m_instructions2.setFont(m_font);
-	//m_instructions2.setString("Controls: \n  'A' to move left,\n  'D' to move right,\n  'W' to serve \n");
-	//m_instructions2.setCharacterSize(30);
-	//m_instructions2.setFillColor(sf::Color::White);
-	//m_instructions2.setPosition(sf::Vector2f(100, 500));
 }
 
 PongMenu::~PongMenu()
@@ -84,6 +78,5 @@ void PongMenu::Render(sf::RenderWindow* window) {
 	window->draw(exit);
 
 	window->draw(m_instructions1);
-	//window->draw(m_instructions2);
 	window->display();
 }

@@ -24,6 +24,10 @@ sf::Vector2f Ball::GetVelocity() {
 	return m_velocity;
 }
 
+float Ball::GetRadius() {
+	return m_ball.getRadius();
+}
+
 void Ball::SetRadius(float pos) {
 	m_ball.setRadius(pos);
 }

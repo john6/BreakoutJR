@@ -12,7 +12,6 @@ class PongMenu
 private:
 	RESOURCES* m_resources;
 	sf::Text m_instructions1;
-	//sf::Text m_instructions2;
 
 	Button m_playButton;
 	Button m_exitButton;

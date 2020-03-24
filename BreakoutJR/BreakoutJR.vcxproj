@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BreakObject.cpp" />
+    <ClCompile Include="BreakoutGame.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Court.cpp" />
     <ClCompile Include="GameRenderer.cpp" />
     <ClCompile Include="GLOBAL_CONSTANTS.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PongGame.cpp" />
@@ -36,11 +38,13 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="BreakObject.h" />
+    <ClInclude Include="BreakoutGame.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="GameRenderer.h" />
     <ClInclude Include="GAME_STATE.h" />
     <ClInclude Include="GLOBAL_CONSTANTS.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MOUSE_STATE.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PongGame.h" />
