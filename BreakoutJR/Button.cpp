@@ -22,6 +22,7 @@ Button::BUTTON_STATE Button::GetState() {
 void Button::SetText(std::string s) {
 	m_text.setString(s);
 	m_text.setCharacterSize(m_positionAndSize.getSize().x / 10.0f);
+	m_text.setOutlineThickness(1.0f);
 	m_text.setPosition(sf::Vector2f(m_positionAndSize.getPosition().x + (m_positionAndSize.getSize().x / 3.0f),
 		m_positionAndSize.getPosition().y + (m_positionAndSize.getSize().y / 3.0f)));
 }
@@ -32,24 +33,28 @@ void Button::SetColorsFromState() {
 		m_positionAndSize.setFillColor(m_colorUp);
 		m_positionAndSize.setOutlineColor(m_colorDown);
 		m_text.setFillColor(m_colorDown);
+		m_text.setOutlineColor(sf::Color::Black);
 		break;
 	}
 	case Button::HOVER: {
 		m_positionAndSize.setFillColor(m_colorHover);
 		m_positionAndSize.setOutlineColor(m_colorDown);
 		m_text.setFillColor(m_colorDown);
+		m_text.setOutlineColor(sf::Color::Black);
 		break;
 	}
 	case Button::DOWN: {
 		m_positionAndSize.setFillColor(m_colorDown);
 		m_positionAndSize.setOutlineColor(m_colorUp);
 		m_text.setFillColor(m_colorUp);
+		m_text.setOutlineColor(sf::Color::Black);
 		break;
 	}
 	default: {
 		m_positionAndSize.setFillColor(m_colorUp);
 		m_positionAndSize.setOutlineColor(m_colorDown);
 		m_text.setFillColor(m_colorDown);
+		m_text.setOutlineColor(sf::Color::Black);
 		break;
 	}
 	}

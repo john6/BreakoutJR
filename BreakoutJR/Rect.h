@@ -8,6 +8,7 @@ class Rect
 {
 protected:
 	sf::Vector2f m_position;
+	sf::Vector2f m_center_offset;
 	sf::Vector2f m_center;
 	float m_width;
 	float m_height;
@@ -24,12 +25,16 @@ public:
 	~Rect();
 
 	sf::Vector2f GetPosition();
+	sf::Vector2f GetCenter();
+	sf::Vector2f GetCenterOffset();
 	std::vector<sf::Vector2f> GetPoints();
 	float GetWidth();
 	float GetHeight();
 	float GetCurrAngle();
 	float GetContinuousRotation();
 	void SetPosition(sf::Vector2f origin);
+	//void SetCenterOffset(sf::Vector2f centerOffset);
+	//void SetCenter(sf::Vector2f center);
 	void SetWidth(float width);
 	void SetHeight(float height);
 	void SetRotation(float rotation);

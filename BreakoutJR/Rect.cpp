@@ -24,11 +24,15 @@ std::vector<sf::Vector2f> Rect::GetPoints() {
 }
 
 sf::Vector2f Rect::GetPosition() { return m_position; }
+sf::Vector2f Rect::GetCenterOffset() { return sf::Vector2f((m_width / 2), (m_height / 2)); }
+sf::Vector2f Rect::GetCenter() { return sf::Vector2f( m_position.x + (m_width / 2), m_position.y + (m_height / 2) );  }
 float Rect::GetWidth() { return m_width; }
 float Rect::GetHeight() { return m_height; }
 float Rect::GetCurrAngle() { return m_currAngle;  }
 float Rect::GetContinuousRotation() { return m_continuous_rotation; }
 void Rect::SetPosition(sf::Vector2f origin) { m_position = origin;  }
+//void Rect::SetCenterOffset(sf::Vector2f centerOffset) { m_center_offset = centerOffset;  }
+//void Rect::SetCenter(sf::Vector2f center) { m_center = center; }
 void Rect::SetWidth(float width) { m_width = width;  }
 void Rect::SetHeight(float height) { m_height = height;  }
 void Rect::SetRotation(float rotation) { m_currAngle = rotation;  }

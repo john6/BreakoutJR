@@ -3,26 +3,24 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>    
-#include "PongGame.h"
-#include "PongMenu.h"
+#include "BreakoutGame.h"
+#include "BreakoutMenu.h"
 #include "GAME_STATE.h"
 #include "GLOBAL_CONSTANTS.h"
+#include "DIFFICULTY.h"
 #include "RESOURCES.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "BREAKOUT");
 
-	int currLvl = 1;
+	int currLvl;
 	RESOURCES resources = RESOURCES();
-	PongGame* lvlOne = new PongGame(Level(0), &resources);
-	PongGame* lvlTwo = new PongGame(Level(1), &resources);
-	PongGame* lvlThree = new PongGame(Level(2), &resources);
-	std::vector<PongGame*> levels{ lvlOne, lvlTwo, lvlThree };
-	PongGame* game = levels[currLvl];
-	PongMenu menu(&resources);
+	DIFFICULTY difficulty = MEDIUM;
+	std::vector<BreakoutGame*> levels;
+	BreakoutGame* game = new BreakoutGame(Level(0), difficulty, &resources); // This is bad but its just here to avoid an unintialized thing on line 49
+	BreakoutMenu menu(&resources);
 	GAME_STATE state = MENU;
-
 	typedef std::chrono::high_resolution_clock hiResTime;
 	typedef std::chrono::microseconds microSec;
 	typedef std::chrono::high_resolution_clock::time_point hiRes_time_point;
@@ -53,29 +51,39 @@ int main()
 			}
 			case WIN: {
 				// std::cout << "update game\n";
-				delete levels[currLvl];
-				PongGame* pongGame = new PongGame(Level(currLvl), &resources);
-				levels[currLvl] = pongGame;
 				if (currLvl < (levels.size() - 1)) { //proceed to next level
 					currLvl += 1;
 					game = levels[currLvl];
 					state = IN_GAME;
 				}
 				else { //Player won the game
-					currLvl = 0;
-					game = levels[currLvl];
+					delete levels[0];
+					delete levels[1];
+					delete levels[2];
 					state = MENU;
 				}
 				break;
 
 			}
 			case LOSE: {
-				delete levels[currLvl];
-				PongGame* pongGame = new PongGame(Level(currLvl), &resources);
-				levels[currLvl] = pongGame;
-				currLvl = 0;
-				game = levels[currLvl];
+				delete levels[0];
+				delete levels[1];
+				delete levels[2];
 				state = MENU;
+				break;
+			}
+			case START_GAME: {
+				currLvl = 0;
+				DIFFICULTY difficulty = menu.GetDifficulty();
+				levels.clear();
+				BreakoutGame* lvlOne = new BreakoutGame(Level(0), difficulty, &resources);
+				BreakoutGame* lvlTwo = new BreakoutGame(Level(1), difficulty, &resources);
+				BreakoutGame* lvlThree = new BreakoutGame(Level(2), difficulty, &resources);
+				levels.insert(levels.begin(), lvlOne);
+				levels.insert(levels.begin() + 1, lvlTwo);
+				levels.insert(levels.begin() + 2, lvlThree);
+				game = levels[currLvl];
+				state = IN_GAME;
 				break;
 			}
 			}

@@ -10,12 +10,8 @@ public:
 //according to this article I should be adding extern here but that means I have to define these variables elsewhere also
 
 //GAME SETTINGS
-
-const float BALL_SPEED_PER_MILLISECOND = 0.7f; // me 1.0f;                   // DAD VALUE .40f;
-const float PADDLE_SPEED_PER_MILLISECOND = 0.6f; // me 0.9f;                    // DAD VALUE 0.5f;
 const float MICROSECONDS_TO_MILLISECONDS = 1000.0f;
 const float PADDLE_HEIGHT = 20.0f;
-const float PADDLE_WIDTH = 100.0f;
 const float COURT_WIDTH = 700.0f;
 const float COURT_HEIGHT = 800.0f;
 const float WALL_THICKNESS = 15.0f;
@@ -24,6 +20,22 @@ const float BALL_RADIUS = 10.0f;
 const float VERTICLE_MARGIN = 50.0f;
 const float HORIZONTAL_MARGIN = 25.0f;
 
+//EASY SETTINGS
+const float BALL_SPEED_PER_MILLISECOND_EASY = 0.40f;
+const float PADDLE_SPEED_PER_MILLISECOND_EASY = 0.6f;
+const float PADDLE_WIDTH_EASY = 150.0f;
+const float SECONDS_TO_WIN_EASY = 300.0f;
+//MEDIUM SETTINGS
+const float BALL_SPEED_PER_MILLISECOND_MEDIUM = 0.7f;
+const float PADDLE_SPEED_PER_MILLISECOND_MEDIUM = 0.6f;
+const float PADDLE_WIDTH_MEDIUM = 120.0f;
+const float SECONDS_TO_WIN_MEDIUM = 180.0f;
+
+//HARD SETTINGS
+const float BALL_SPEED_PER_MILLISECOND_HARD = 1.0f;
+const float PADDLE_SPEED_PER_MILLISECOND_HARD = 0.9f;
+const float PADDLE_WIDTH_HARD = 100.0f;
+const float SECONDS_TO_WIN_HARD = 135.0f;
 
 const int SCREEN_WIDTH = static_cast<int>(COURT_WIDTH + (HORIZONTAL_MARGIN * 2));
 const int SCREEN_HEIGHT = static_cast<int>(COURT_HEIGHT + (VERTICLE_MARGIN * 2));

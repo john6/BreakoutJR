@@ -1,0 +1,12 @@
+#include "DIFFICULTY.h"
+
+
+
+DIFFICULTY::DIFFICULTY()
+{
+}
+
+
+DIFFICULTY::~DIFFICULTY()
+{
+}

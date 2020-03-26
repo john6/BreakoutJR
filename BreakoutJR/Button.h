@@ -16,7 +16,6 @@ private:
 	std::function<void(int)> m_callback;
 	Button::BUTTON_STATE m_state;
 
-
 public:
 	Button(std::string string, sf::RectangleShape positionAndSize);
 	Button() = default;

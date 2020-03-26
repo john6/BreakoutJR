@@ -10,5 +10,5 @@ public:
 
 	static void Render(float elapsedMilliseconds);
 
-	static sf::RectangleShape CreateDrawableRect(Rect rect);
+	static sf::RectangleShape CreateDrawableRect(Rect rect, bool useNewCenter=false);
 };

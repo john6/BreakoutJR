@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BreakObject.cpp" />
-    <ClCompile Include="BreakoutGame.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Court.cpp" />
@@ -30,25 +29,25 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paddle.cpp" />
-    <ClCompile Include="PongGame.cpp" />
-    <ClCompile Include="PongMenu.cpp" />
+    <ClCompile Include="BreakoutGame.cpp" />
+    <ClCompile Include="BreakoutMenu.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="RESOURCES.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="BreakObject.h" />
-    <ClInclude Include="BreakoutGame.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="DIFFICULTY.h" />
     <ClInclude Include="GameRenderer.h" />
     <ClInclude Include="GAME_STATE.h" />
     <ClInclude Include="GLOBAL_CONSTANTS.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MOUSE_STATE.h" />
     <ClInclude Include="Paddle.h" />
-    <ClInclude Include="PongGame.h" />
-    <ClInclude Include="PongMenu.h" />
+    <ClInclude Include="BreakoutGame.h" />
+    <ClInclude Include="BreakoutMenu.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RESOURCES.h" />
